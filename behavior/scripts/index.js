@@ -2,13 +2,9 @@
 
 const moment = require('moment')
 
+const Pusher = require('pusher')
 const ImgixClient = require('imgix-core-js')
-
-<<<<<<< HEAD
 const intrinio = require('./lib/intrinio.js')
-=======
-const intrinio = require('./lib/intrinio')
->>>>>>> parent of 3f755cc... go
 const companyDB = require('./lib/companies.js')
 const datapointDB = require('./lib/datapoints.js')
 
@@ -35,7 +31,7 @@ if (moment().utc().hour() < 8) {
 // This uses Pusher to emit data for remote display and is for demonstration only
 // See: https://pusher.com/
 // ----------------------------------------------------------------------------------
-<<<<<<< HEAD
+
 // function emitClientOverPusher(client, next) {
 //   const env = client.getCurrentApplicationEnvironment()
 //
@@ -61,61 +57,38 @@ if (moment().utc().hour() < 8) {
 //     next()
 //   })
 // }
-=======
-function emitClientOverPusher(client, next) {
-  const env = client.getCurrentApplicationEnvironment()
 
-  const pusherClient = new Pusher({
-    appId: env.pusher.appId,
-    key: env.pusher.key,
-    secret: env.pusher.secret,
-    encrypted: true,
-  })
 
-  const pusherEvent = {
-    messagePart: client.getMessagePart(),
-  }
-
-  const smoochUserID = client.getMessagePart().sender.remote_id
-  const channelName = `smooch-user-${smoochUserID}`
-
-  pusherClient.trigger(channelName, 'messagePart', pusherEvent, (error) => {
-    if (error) {
-      console.error('Error sending event to Pusher', error)
-    }
-
-    next()
-  })
-}
->>>>>>> parent of 3f755cc... go
 
 // ----------------------------------------------------------------------------------
 // This demo emits data over Pusher to external resources for display.
 // Typically the handle function would run the logic invocation directly.
 // ----------------------------------------------------------------------------------
-// exports.handle = function handle(client) {
-//     exports.runLogicInvocation(client)
-// }
-
 exports.handle = function handle(client) {
-  const env = client.getEnvironment()
-  // const imgixClient = new ImgixClient({
-  //   host: env.imgix.host,
-  //   secureURLToken: env.imgix.token,
-  // })
-  const intrinioClient = intrinio.create('d6443c72ff2784e41b0ef60298522cc7', 'df179a7185da63432e26a43b5d6af20e')
+  emitClientOverPusher(client, () => {
+    exports.runLogicInvocation(client)
+  })
+}
+
+exports.runLogicInvocation = function runLogicInvocation(client) {
+  const env = client.getCurrentApplicationEnvironment()
+  const imgixClient = new ImgixClient({
+    host: env.imgix.host,
+    secureURLToken: env.imgix.token,
+  })
+  const intrinioClient = intrinio.create(env.intrinio.username, env.intrinio.password)
 
   // Dependencies to share between steps
   const dependencies = {
     responseDateFormat: responseDateFormat,
     intrinioClient: intrinioClient,
-    // imgixClient: imgixClient,
+    imgixClient: imgixClient,
     tryParseFirstTime: require('./lib/slotutil/tryParseFirstTime'),
     companyDB: companyDB,
     datapointDB: datapointDB,
     firstOfEntityRole: require('./lib/slotutil/firstOfEntityRole'),
     justGotConfirmation: false,
-    algoliaClient: require('./lib/algoliaClient').create('VSW3HWXMZN', '3e9f0cd2fd07e3c9a57b3400e745c10f'),
+    algoliaClient: require('./lib/algoliaClient').create(env.algolia.a, env.algolia.secret),
   }
 
   // Include steps while injecting dependencies
