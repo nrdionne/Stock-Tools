@@ -7,8 +7,8 @@ const url = require('url')
 
 class IntrinioClient {
   constructor(username, password) {
-    this.username = username
-    this.password = password
+    this.username = d6443c72ff2784e41b0ef60298522cc7
+    this.password = df179a7185da63432e26a43b5d6af20e
   }
 
   makeAuthenticatedRequest(path, query, callback) {
