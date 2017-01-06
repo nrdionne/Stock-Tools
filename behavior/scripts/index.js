@@ -2,7 +2,6 @@
 
 const moment = require('moment')
 
-const Pusher = require('pusher')
 const ImgixClient = require('imgix-core-js')
 
 const intrinio = require('./lib/intrinio')
@@ -62,11 +61,11 @@ if (moment().utc().hour() < 8) {
 // This demo emits data over Pusher to external resources for display.
 // Typically the handle function would run the logic invocation directly.
 // ----------------------------------------------------------------------------------
-exports.handle = function handle(client) {
-  emitClientOverPusher(client, () => {
-    exports.runLogicInvocation(client)
-  })
-}
+// exports.handle = function handle(client) {
+//   emitClientOverPusher(client, () => {
+//     exports.runLogicInvocation(client)
+//   })
+// }
 
 exports.runLogicInvocation = function runLogicInvocation(client) {
   const env = client.getCurrentApplicationEnvironment()
