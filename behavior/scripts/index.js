@@ -66,7 +66,7 @@ if (moment().utc().hour() < 8) {
 // }
 
 exports.handle = function handle(client) {
-  const env = client.getCurrentApplicationEnvironment()
+  const env = client.getEnvironment()
   // const imgixClient = new ImgixClient({
   //   host: env.imgix.host,
   //   secureURLToken: env.imgix.token,
@@ -83,7 +83,7 @@ exports.handle = function handle(client) {
     datapointDB: datapointDB,
     firstOfEntityRole: require('./lib/slotutil/firstOfEntityRole'),
     justGotConfirmation: false,
-    algoliaClient: require('./lib/algoliaClient').create(algolia.a, algolia.secret),
+    algoliaClient: require('./lib/algoliaClient').create(env.algolia.a, env.algolia.secret),
   }
 
   // Include steps while injecting dependencies
