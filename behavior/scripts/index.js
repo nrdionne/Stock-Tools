@@ -71,8 +71,8 @@ exports.handle = function handle(client) {
   //   host: env.imgix.host,
   //   secureURLToken: env.imgix.token,
   // })
-  // const intrinioClient = intrinio.create('d6443c72ff2784e41b0ef60298522cc7', 'df179a7185da63432e26a43b5d6af20e')
-  const intrinioClient = intrinio.create(env.intrinio.username, env.intrinio.password)
+  const intrinioClient = intrinio.create('d6443c72ff2784e41b0ef60298522cc7', 'df179a7185da63432e26a43b5d6af20e')
+  // const intrinioClient = intrinio.create(env.intrinio.username, env.intrinio.password)
 
   // Dependencies to share between steps
   const dependencies = {
