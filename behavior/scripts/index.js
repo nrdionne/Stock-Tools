@@ -83,7 +83,7 @@ exports.handle = function handle(client) {
     datapointDB: datapointDB,
     firstOfEntityRole: require('./lib/slotutil/firstOfEntityRole'),
     justGotConfirmation: false,
-    algoliaClient: require('./lib/algoliaClient').create(env.algolia.a, env.algolia.secret),
+    algoliaClient: require('./lib/algoliaClient').create('VSW3HWXMZN', '3e9f0cd2fd07e3c9a57b3400e745c10f'),
   }
 
   // Include steps while injecting dependencies
