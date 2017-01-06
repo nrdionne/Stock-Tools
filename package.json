@@ -12,7 +12,6 @@
     "algoliasearch": "^3.18.0",
     "articles": "^0.2.1",
     "googleapis": "^12.3.0",
-    "googlemaps": "^1.11.1",
     "imgix-core-js": "^1.0.3",
     "initai-dev-server": "^0.4.3",
     "initai-node": "~0.0.7",
@@ -20,7 +19,6 @@
     "natural": "^0.4.0",
     "nlp_compromise": "^6.5.0",
     "numeral": "^1.5.3",
-    "pusher": "^1.5.0",
     "request": "^2.74.0",
     "url": "^0.11.0"
   }
