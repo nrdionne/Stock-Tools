@@ -71,7 +71,7 @@ exports.handle = function handle(client) {
   //   host: env.imgix.host,
   //   secureURLToken: env.imgix.token,
   // })
-  const intrinioClient = intrinio.create(d6443c72ff2784e41b0ef60298522cc7, df179a7185da63432e26a43b5d6af20e)
+  const intrinioClient = intrinio.create('d6443c72ff2784e41b0ef60298522cc7', 'df179a7185da63432e26a43b5d6af20e')
 
   // Dependencies to share between steps
   const dependencies = {
@@ -83,7 +83,7 @@ exports.handle = function handle(client) {
     datapointDB: datapointDB,
     firstOfEntityRole: require('./lib/slotutil/firstOfEntityRole'),
     justGotConfirmation: false,
-    algoliaClient: require('./lib/algoliaClient').create(env.algolia.a, env.algolia.secret),
+    algoliaClient: require('./lib/algoliaClient').create(algolia.a, algolia.secret),
   }
 
   // Include steps while injecting dependencies
