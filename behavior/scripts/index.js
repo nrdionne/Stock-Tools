@@ -4,7 +4,7 @@ const moment = require('moment')
 
 const ImgixClient = require('imgix-core-js')
 
-const intrinio = require('./lib/intrinio')
+const intrinio = require('./lib/intrinio.js')
 const companyDB = require('./lib/companies.js')
 const datapointDB = require('./lib/datapoints.js')
 
