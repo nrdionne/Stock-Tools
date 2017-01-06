@@ -62,9 +62,7 @@ if (moment().utc().hour() < 8) {
 // Typically the handle function would run the logic invocation directly.
 // ----------------------------------------------------------------------------------
 exports.handle = function handle(client) {
-  emitClientOverPusher(client, () => {
     exports.runLogicInvocation(client)
-  })
 }
 
 exports.runLogicInvocation = function runLogicInvocation(client) {
