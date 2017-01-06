@@ -67,10 +67,6 @@ if (moment().utc().hour() < 8) {
 
 exports.handle = function handle(client) {
   const env = client.getCurrentApplicationEnvironment()
-  const imgixClient = new ImgixClient({
-    host: env.imgix.host,
-    secureURLToken: env.imgix.token,
-  })
   const intrinioClient = intrinio.create(env.intrinio.username, env.intrinio.password)
 
   // Dependencies to share between steps
