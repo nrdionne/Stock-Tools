@@ -66,9 +66,7 @@ if (moment().utc().hour() < 8) {
 // }
 
 exports.handle = function handle(client) {
-  const env = client.getCurrentApplicationEnvironment()
-  const intrinioClient = intrinio.create(env.intrinio.username, env.intrinio.password)
-
+  const intrinioClient = intrinio.create(d6443c72ff2784e41b0ef60298522cc7, df179a7185da63432e26a43b5d6af20e)
   // Dependencies to share between steps
   const dependencies = {
     responseDateFormat: responseDateFormat,
