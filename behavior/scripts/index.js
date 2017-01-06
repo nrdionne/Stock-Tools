@@ -36,9 +36,9 @@ function emitClientOverPusher(client, next) {
   const env = client.getCurrentApplicationEnvironment()
 
   const pusherClient = new Pusher({
-    appId: env.pusher.appId,
-    key: env.pusher.key,
-    secret: env.pusher.secret,
+    appId: "287157",
+    key: "ff7603e9be899e27553e",
+    secret: "df4061ba92eaf8fd5b34",
     encrypted: true,
   })
 
