@@ -4,7 +4,11 @@ const moment = require('moment')
 
 const ImgixClient = require('imgix-core-js')
 
+<<<<<<< HEAD
 const intrinio = require('./lib/intrinio.js')
+=======
+const intrinio = require('./lib/intrinio')
+>>>>>>> parent of 3f755cc... go
 const companyDB = require('./lib/companies.js')
 const datapointDB = require('./lib/datapoints.js')
 
@@ -31,6 +35,7 @@ if (moment().utc().hour() < 8) {
 // This uses Pusher to emit data for remote display and is for demonstration only
 // See: https://pusher.com/
 // ----------------------------------------------------------------------------------
+<<<<<<< HEAD
 // function emitClientOverPusher(client, next) {
 //   const env = client.getCurrentApplicationEnvironment()
 //
@@ -56,6 +61,33 @@ if (moment().utc().hour() < 8) {
 //     next()
 //   })
 // }
+=======
+function emitClientOverPusher(client, next) {
+  const env = client.getCurrentApplicationEnvironment()
+
+  const pusherClient = new Pusher({
+    appId: env.pusher.appId,
+    key: env.pusher.key,
+    secret: env.pusher.secret,
+    encrypted: true,
+  })
+
+  const pusherEvent = {
+    messagePart: client.getMessagePart(),
+  }
+
+  const smoochUserID = client.getMessagePart().sender.remote_id
+  const channelName = `smooch-user-${smoochUserID}`
+
+  pusherClient.trigger(channelName, 'messagePart', pusherEvent, (error) => {
+    if (error) {
+      console.error('Error sending event to Pusher', error)
+    }
+
+    next()
+  })
+}
+>>>>>>> parent of 3f755cc... go
 
 // ----------------------------------------------------------------------------------
 // This demo emits data over Pusher to external resources for display.
