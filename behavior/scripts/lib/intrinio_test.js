@@ -6,7 +6,7 @@ function testIntrinioClient() {
   const intrinoClient = intrinio.create('a', 'b')
 
   intrinoClient.companyByTicker('AAPL', (result) => {
-    console.log('received company result from intrinio:', result)
+    // console.log('received company result from intrinio:', result)
   })
 
   intrinoClient.dailyPricesByTicker('AAPL', 3, (result) => {
