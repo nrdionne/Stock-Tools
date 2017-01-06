@@ -2,7 +2,7 @@
 
 const moment = require('moment')
 const numeral = require('numeral')
-console.log('got to price page')
+
 module.exports = (client, state) => {
   return client.createStep({
     satisfied() {

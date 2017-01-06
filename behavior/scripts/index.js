@@ -2,8 +2,8 @@
 
 const moment = require('moment')
 
-const Pusher = require('pusher')
 const ImgixClient = require('imgix-core-js')
+
 const intrinio = require('./lib/intrinio.js')
 const companyDB = require('./lib/companies.js')
 const datapointDB = require('./lib/datapoints.js')
@@ -31,7 +31,6 @@ if (moment().utc().hour() < 8) {
 // This uses Pusher to emit data for remote display and is for demonstration only
 // See: https://pusher.com/
 // ----------------------------------------------------------------------------------
-
 // function emitClientOverPusher(client, next) {
 //   const env = client.getCurrentApplicationEnvironment()
 //
@@ -58,37 +57,33 @@ if (moment().utc().hour() < 8) {
 //   })
 // }
 
-
-
 // ----------------------------------------------------------------------------------
 // This demo emits data over Pusher to external resources for display.
 // Typically the handle function would run the logic invocation directly.
 // ----------------------------------------------------------------------------------
-exports.handle = function handle(client) {
-  emitClientOverPusher(client, () => {
-    exports.runLogicInvocation(client)
-  })
-}
+// exports.handle = function handle(client) {
+//     exports.runLogicInvocation(client)
+// }
 
-exports.runLogicInvocation = function runLogicInvocation(client) {
-  const env = client.getCurrentApplicationEnvironment()
-  const imgixClient = new ImgixClient({
-    host: env.imgix.host,
-    secureURLToken: env.imgix.token,
-  })
-  const intrinioClient = intrinio.create(env.intrinio.username, env.intrinio.password)
+exports.handle = function handle(client) {
+  const env = client.getEnvironment()
+  // const imgixClient = new ImgixClient({
+  //   host: env.imgix.host,
+  //   secureURLToken: env.imgix.token,
+  // })
+  const intrinioClient = intrinio.create('d6443c72ff2784e41b0ef60298522cc7', 'df179a7185da63432e26a43b5d6af20e')
 
   // Dependencies to share between steps
   const dependencies = {
     responseDateFormat: responseDateFormat,
     intrinioClient: intrinioClient,
-    imgixClient: imgixClient,
+    // imgixClient: imgixClient,
     tryParseFirstTime: require('./lib/slotutil/tryParseFirstTime'),
     companyDB: companyDB,
     datapointDB: datapointDB,
     firstOfEntityRole: require('./lib/slotutil/firstOfEntityRole'),
     justGotConfirmation: false,
-    algoliaClient: require('./lib/algoliaClient').create(env.algolia.a, env.algolia.secret),
+    algoliaClient: require('./lib/algoliaClient').create('VSW3HWXMZN', '3e9f0cd2fd07e3c9a57b3400e745c10f'),
   }
 
   // Include steps while injecting dependencies
