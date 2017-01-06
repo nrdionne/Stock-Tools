@@ -4,7 +4,6 @@ const moment = require('moment')
 
 const Pusher = require('pusher')
 const ImgixClient = require('imgix-core-js')
-
 const intrinio = require('./lib/intrinio')
 const companyDB = require('./lib/companies.js')
 const datapointDB = require('./lib/datapoints.js')
@@ -36,17 +35,17 @@ function emitClientOverPusher(client, next) {
   const env = client.getCurrentApplicationEnvironment()
 
   const pusherClient = new Pusher({
-    appId: env.pusher.appId,
-    key: env.pusher.key,
-    secret: env.pusher.secret,
-    encrypted: true,
+     appId: '287157',
+     key: 'ff7603e9be899e27553e',
+     secret: 'df4061ba92eaf8fd5b34',
+     encrypted: true
   })
 
   const pusherEvent = {
     messagePart: client.getMessagePart(),
   }
 
-  const smoochUserID = client.getMessagePart().sender.remote_id
+  const smoochUserID = 'stock-tools-northout'
   const channelName = `smooch-user-${smoochUserID}`
 
   pusherClient.trigger(channelName, 'messagePart', pusherEvent, (error) => {
